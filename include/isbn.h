@@ -1,5 +1,5 @@
-#ifndef PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_ISBN_H
-#define PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_ISBN_H
+#ifndef ISBN_H
+#define ISBN_H
 
 
 class isbn {
@@ -9,4 +9,4 @@ private:
 };
 
 
-#endif //PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_ISBN_H
+#endif // ISBN_H
