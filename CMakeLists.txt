@@ -4,4 +4,11 @@ project(Prova-intermedia-di-programmazione)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin/")
 
-add_executable(Prova-intermedia-di-programmazione src/isbn/isbn.h src/isbn/isbn.cpp src/date/date.h src/date/date.cpp src/main.cpp src/book/book.cpp src/book/book.h)
+add_executable(${PROJECT_NAME} src/isbn/isbn.h 
+                               src/isbn/isbn.cpp 
+                               src/date/date.h 
+                               src/date/date.cpp 
+                               src/book/book.cpp 
+                               src/book/book.h
+                               src/main.cpp 
+                               )
