@@ -1,14 +1,16 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.84)
 project(Prova-intermedia-di-programmazione)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "../bin/")
 
-add_executable(${PROJECT_NAME} src/isbn/isbn.h 
-                               src/isbn/isbn.cpp 
-                               src/date/date.h 
-                               src/date/date.cpp 
-                               src/book/book.cpp 
-                               src/book/book.h
-                               src/main.cpp 
-                               )
+include_directories(include)
+
+add_library(${PROJECT_NAME}
+        src/isbn.cpp src/date.cpp src/book.cpp)
+
+add_executable(main
+        src/main.cpp
+        )
+
+target_link_libraries(main ${PROJECT_NAME})
