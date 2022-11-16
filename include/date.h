@@ -1,5 +1,5 @@
-#ifndef PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_DATE_H
-#define PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_DATE_H
+#ifndef DATE_H
+#define DATE_H
 
 
 class date {
@@ -9,4 +9,4 @@ private:
 };
 
 
-#endif //PROVA_INTERMEDIA_DI_PROGRAMMAZIONE_DATE_H
+#endif // DATE_H
