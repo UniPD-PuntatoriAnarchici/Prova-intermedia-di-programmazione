@@ -3,13 +3,16 @@
 
 #include <string>
 
-class book {
-
+class Book {
 public:
     enum Statuses {
         LENDING,
         AVAILABLE
     };
+
+
+    Book(const std::string &titolo = "", const std::string &nomeAutore = "", const std::string &cognomeAutore = "",
+         Statuses stato = AVAILABLE);
 
     /// region - Getters
 
@@ -22,7 +25,7 @@ public:
     }
 
     std::string cognomeAutore(void) const {
-        return nomeAutore_;
+        return cognomeAutore_;
     }
 
     Statuses stato(void) const {
@@ -30,7 +33,7 @@ public:
     }
     /// endregion - Getters
 
-    /// region: Setters
+    /// region - Setters
 
     void setTitolo(const std::string &titolo) {
         titolo_ = titolo;
@@ -62,6 +65,8 @@ private:
 
     Statuses stato_;
 };
+
+std::ostream &operator<<(std::ostream &os, Book book);
 
 
 #endif // BOOK_H
