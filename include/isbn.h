@@ -2,7 +2,7 @@
 #define ISBN_H
 
 
-class isbn {
+class Isbn {
 public:
 private:
 

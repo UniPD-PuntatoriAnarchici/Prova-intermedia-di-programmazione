@@ -2,7 +2,7 @@
 #define DATE_H
 
 
-class date {
+class Date {
 public:
 private:
 
