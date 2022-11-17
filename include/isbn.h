@@ -4,22 +4,22 @@
 
 class Isbn {
 public:
-class ISBN_invalid{};
+    class ISBN_invalid{};
 
-//Constructor
-Isbn(const std::string Isbn);
+    Isbn(const std::string Isbn);
 
-//Get
-const std::string& getIsbn()const {return isbn_;}
+    /// region - Getters
+    const std::string &isbn() const { return isbn_; }
+    /// endregion - Getters
 
-//Set
-void set_isbn(std::string Isbn){isbn_=Isbn;}
-
+    /// region - Setters
+    void set_isbn(std::string Isbn) { isbn_ = Isbn; }
+    /// endregion - Setters
 
 
 private:
- std::string isbn_;
- bool IsValid(std::string isbn);
+    std::string isbn_;
+    bool IsValid(std::string isbn);
 };
 
 
