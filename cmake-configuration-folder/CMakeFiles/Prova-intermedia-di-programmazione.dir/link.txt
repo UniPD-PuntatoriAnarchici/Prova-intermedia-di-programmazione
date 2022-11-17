@@ -1,0 +1,2 @@
+/usr/bin/ar qc libProva-intermedia-di-programmazione.a  CMakeFiles/Prova-intermedia-di-programmazione.dir/src/isbn.cpp.o CMakeFiles/Prova-intermedia-di-programmazione.dir/src/date.cpp.o CMakeFiles/Prova-intermedia-di-programmazione.dir/src/book.cpp.o
+/usr/bin/ranlib libProva-intermedia-di-programmazione.a
