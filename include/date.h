@@ -37,6 +37,8 @@ public:
 
     static bool IsLeapYear(const long year);
 
+    static Date Today(void);
+
 private:
     unsigned short day_;
     Month month_;
