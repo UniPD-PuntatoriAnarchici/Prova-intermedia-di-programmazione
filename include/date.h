@@ -2,6 +2,7 @@
 #define DATE_H
 
 #include <ostream>
+#include <string>
 
 class Date {
 public:
@@ -18,7 +19,9 @@ public:
 
     int day(void) const { return day_; }
 
-    Month month(void) const { return month_; }
+    std::string month(void) const { return months[month_ - 1]; }
+
+    Month month_number(void) const { return month_; }
 
     int year(void) const { return year_; }
     /// endregion - Getters
@@ -39,6 +42,8 @@ private:
     Month month_;
     int year_;
     
+    std::string months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
     bool IsValid(int day, Month month, int year);
 };
 
