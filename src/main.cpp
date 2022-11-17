@@ -34,7 +34,7 @@ int main() {
     Book book2{"Titolo"};
     Book book3{"Titolo", "Nome"};
     Book book4{"Titolo", "Nome", "Cognome"};
-    Book book5{"Titolo", "Nome", "Cognome", Book::LENDING};
+    Book book5{"Titolo", "Nome", "Cognome", Date{}, Book::LENDING};
 
     std::cout << book1 << std::endl;
     std::cout << book2 << std::endl;
