@@ -1,10 +1,14 @@
 #include <iostream>
 #include <vector>
+#include "date.h"
 #include "book.h"
 
 int main() {
-    std::cout << "Hello World!" << std::endl;
-
+    /* 
+     * DATE TESTING
+     */
+    Date default_date{};
+    std::cout << default_date.day() << " " << default_date.month() << " " << default_date.year() << std::endl;
     /*
      * MINIMAL TESTING
      */

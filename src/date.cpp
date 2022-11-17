@@ -2,8 +2,8 @@
 
 Date::Date(const int day, const Month month, const int year)
     : day_{day}, month_{month}, year_{year} {
-        if (!IsValid(day, month, year)) throw DATE_invalid();
-    }
+    if (!IsValid(day, month, year)) throw DATE_invalid();
+}
 
 bool Date::IsValid(int day, Month month, int year){
     if (day <= 0) return false;
@@ -25,10 +25,12 @@ bool Date::IsValid(int day, Month month, int year){
     return true;
 }
 
-/// @brief if year is divisible by 4 and not divisible by 100 
-///        or if it's divisible by 400 it's a leap year
-/// @param year year to check
-/// @return true if it's a leap year, false if it's not
+/**
+ * @brief if year is divisible by 4 and not divisible by 100
+ * or if it's divisible by 400 it's a leap year
+ * @param year year to check
+ * @return true if it's a leap year, faslse if it's not
+*/
 bool Date::IsLeapYear(int year) {
     if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) return true;
     return false;
