@@ -1,4 +1,0 @@
-/home/geko/github/Prova-intermedia-di-programmazione/cmake-configuration-folder/CMakeFiles/rebuild_cache.dir
-/home/geko/github/Prova-intermedia-di-programmazione/cmake-configuration-folder/CMakeFiles/edit_cache.dir
-/home/geko/github/Prova-intermedia-di-programmazione/cmake-configuration-folder/CMakeFiles/main.dir
-/home/geko/github/Prova-intermedia-di-programmazione/cmake-configuration-folder/CMakeFiles/Prova-intermedia-di-programmazione.dir
