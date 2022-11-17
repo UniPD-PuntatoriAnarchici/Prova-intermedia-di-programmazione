@@ -18,10 +18,17 @@ int main() {
     cout << date1 << endl;
     try {
         Date date2{30, Date::Month::Feb, 2022};
-    } catch (Date::DATE_invalid){
+    } catch (Date::DATE_invalid) {
         cout << "Data invalida" << endl;
     }
-    cout << Date::Today() << endl;
+    cout << "Today: " <<  Date::Today() << endl;
+    Date date2{"2001/11/20"};
+    cout << date2 << endl;
+    try {
+        Date date3{"2022/13/14"};
+    } catch (Date::DATE_invalid) {
+        cout << "Data invalida" << endl;
+    }
     cout << endl;
 
     /*
