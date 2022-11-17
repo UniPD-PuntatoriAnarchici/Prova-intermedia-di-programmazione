@@ -19,8 +19,9 @@ int main() {
     try {
         Date date2{30, Date::Month::Feb, 2022};
     } catch (Date::DATE_invalid){
-        cout << "Data invalida";
+        cout << "Data invalida" << endl;
     }
+    cout << Date::Today() << endl;
     cout << endl;
 
     /*
