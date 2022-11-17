@@ -2,71 +2,120 @@
 #define BOOK_H
 
 #include <string>
+#include "date.h"
 
 class Book {
+
 public:
-    enum Statuses {
+    enum Status {
         LENDING,
         AVAILABLE
     };
 
-
-    Book(const std::string &titolo = "", const std::string &nomeAutore = "", const std::string &cognomeAutore = "",
-         Statuses stato = AVAILABLE);
-
     /// region - Getters
 
-    std::string titolo(void) const {
-        return titolo_;
-    }
+    /**
+     * @brief Title's getter
+     * @return string title as `std::string`
+     */
+    std::string title(void) const { return title_; }
 
-    std::string nomeAutore(void) const {
-        return nomeAutore_;
-    }
+    /**
+     * @brief Author_fname's getter
+     * @return Author's first name as `std::string`
+     */
+    std::string author_fname(void) const { return author_fname_; }
 
-    std::string cognomeAutore(void) const {
-        return cognomeAutore_;
-    }
+    /**
+     * @brief Author_lname's getter
+     * @return Author's last name as `std::string`
+     */
+    std::string author_lname(void) const { return author_lname_; }
 
-    Statuses stato(void) const {
-        return stato_;
-    }
+    /**
+     * @brief Status' getter
+     * @return Status' as `Status [enum]`
+     */
+    Status status(void) const { return status_; }
+
+    /**
+     * @brief Copyright date's getter
+     * @return Copyright date's as `Date`
+     */
+    Date copyright_date(void) const { return copyright_date_; }
+
     /// endregion - Getters
 
     /// region - Setters
 
-    void setTitolo(const std::string &titolo) {
-        titolo_ = titolo;
+    /**
+     * @brief Title's setter
+     * @param [in] title as `std::string by const reference`
+     */
+    void set_title(const std::string &title) { title_ = title; }
+
+    /**
+     * @brief Author first name's setter
+     * @param [in] author_fname as `std::string by const reference`
+     */
+    void set_author_fname(const std::string &author_fname) { author_fname_ = author_fname; }
+
+    /**
+     * @brief Author last name's setter
+     * @param [in] author_lname as `std::string by const reference`
+     */
+    void set_author_lname(const std::string &author_lname) { author_lname_ = author_lname; }
+
+    /**
+    * @brief status' setter
+    * @param [in] status as `Status[enum] by value`
+    */
+    void set_status(Status status) { status_ = status; }
+
+    /**
+    * @brief Copyright date's setter
+    * @param [in] copyright_date as `Date by value`
+    */
+    void set_copyright_date(Date copyright_date) {
+        copyright_date_ = copyright_date;
     }
 
-    void setNomeAutore(const std::string &nomeAutore) {
-        nomeAutore_ = nomeAutore;
-    }
-
-    void setCognomeAutore(const std::string &cognomeAutore) {
-        cognomeAutore_ = cognomeAutore;
-    }
-
-    void setStato(Statuses stato) {
-        stato_ = stato;
-    }
+    /**
+    * @brief Copyright date's setter
+    * @param [in] copyright_date as `std::string by const reference`
+    */
+    /*void set_copyright_date(const std::string& copyright_date) {
+        copyright_date_ = new Date(copyright_date);
+    } TODO: string to date*/
 
     /// endregion - Setters
 
+    ///region - Constructors
+
+    explicit Book(std::string title = "", std::string authorFname = "", std::string authorLname = "",
+         const Date &copyrightDate = Date{}, Status status = AVAILABLE);
+//    explicit Book(std::string title = "", std::string authorFname = "", std::string authorLname = "",
+//                  std::string copyrightDate = "", Status status = AVAILABLE);
+
+    ///endregion - Constructors
 
 private:
 
-
     //ISBN isbn_; // TODO: Implement ISBN class
-    std::string titolo_;
-    std::string nomeAutore_;
-    std::string cognomeAutore_;
-    //Date copyrightDate_; // TODO: Implement Date class
+    std::string title_;
 
-    Statuses stato_;
+    std::string author_fname_; // Author first name
+    std::string author_lname_; // Author last name
+
+    Date copyright_date_;
+
+    Status status_;
+
 };
 
-std::ostream &operator<<(std::ostream &os, Book book);
+std::ostream &operator<<(std::ostream &os, const Book &book);
+
+std::ostream &operator<<(std::ostream &os, Book::Status status);
 
 
 #endif // BOOK_H
