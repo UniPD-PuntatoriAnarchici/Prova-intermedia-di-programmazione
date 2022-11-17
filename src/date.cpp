@@ -21,13 +21,25 @@ Date::Date(const std::string &date) {
         elems[i] = elem;
     }
 
-    day_ = std::stoi(elems[2]);
+    // checking int to unsigned short cast
+    int safe_day = stoi(elems[2]);
+    if (safe_day < 0 || safe_day > 65535) throw DATE_invalid();
+
+    day_ = safe_day;
     month_ = Month(std::stoi(elems[1]));
     year_ = std::stoi(elems[0]);
 
     if(!IsValid(day_, month_, year_)) throw DATE_invalid();
 }
 
+/**
+ * @brief Checks if a date is valid. This means day between 0 and 31 with edge cases
+ * for leap years and months with 30 days and month between 1 and 12
+ * @param day day
+ * @param month month
+ * @param year year
+ * @return true if date is valid, false otherways
+*/
 bool Date::IsValid(const unsigned short day, const Month month, const long year){
     if (day <= 0) return false;
     if (month < Month::Jan || month > Month::Dec) return false;
