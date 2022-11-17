@@ -2,10 +2,30 @@
 
 #include <iostream>
 #include <ctime>
+#include <sstream>
 
 Date::Date(const unsigned short day, const Month month, const long year)
     : day_{day}, month_{month}, year_{year} {
     if (!IsValid(day, month, year)) throw DATE_invalid();
+}
+
+Date::Date(const std::string &date) {
+    std::string elems[3] = {"", "", ""};
+    std::stringstream ss(date);
+    std::string elem;
+    
+    // std::getline() reads characters from an input stream and places  
+    // them into a string
+    for (short i = 0; i < 3; i++) {
+        std::getline(ss, elem, '/');
+        elems[i] = elem;
+    }
+
+    day_ = std::stoi(elems[2]);
+    month_ = Month(std::stoi(elems[1]));
+    year_ = std::stoi(elems[0]);
+
+    if(!IsValid(day_, month_, year_)) throw DATE_invalid();
 }
 
 bool Date::IsValid(const unsigned short day, const Month month, const long year){

@@ -14,6 +14,7 @@ public:
 
     // default Date is Unix start time
     Date(const unsigned short day = 1, const Month month = Month::Jan, const long year = 1970);
+    Date(const std::string &date);
 
     /// region - Getters
 
