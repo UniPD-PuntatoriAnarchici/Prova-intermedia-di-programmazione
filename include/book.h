@@ -3,6 +3,7 @@
 
 #include <string>
 #include "date.h"
+#include "isbn.h"
 
 class Book {
 
@@ -11,6 +12,7 @@ public:
         LENDING,
         AVAILABLE
     };
+    static const std::string Status_Map[];
 
     /// region - Getters
 
@@ -34,15 +36,21 @@ public:
 
     /**
      * @brief Status' getter
-     * @return Status' as `Status [enum]`
+     * @return Status as `Status [enum]`
      */
     Status status(void) const { return status_; }
 
     /**
      * @brief Copyright date's getter
-     * @return Copyright date's as `Date`
+     * @return Copyright date as `Date`
      */
     Date copyright_date(void) const { return copyright_date_; }
+
+    /**
+     * @brief Isbn's getter
+     * @return Isbn as `Date`
+     */
+    Isbn isbn(void) const { return isbn_; }
 
     /// endregion - Getters
 
@@ -74,9 +82,9 @@ public:
 
     /**
     * @brief Copyright date's setter
-    * @param [in] copyright_date as `Date by value`
+    * @param [in] copyright_date as `Date by const reference`
     */
-    void set_copyright_date(Date copyright_date) {
+    void set_copyright_date(const Date &copyright_date) {
         copyright_date_ = copyright_date;
     }
 
@@ -84,24 +92,82 @@ public:
     * @brief Copyright date's setter
     * @param [in] copyright_date as `std::string by const reference`
     */
-    /*void set_copyright_date(const std::string& copyright_date) {
-        copyright_date_ = new Date(copyright_date);
-    } TODO: string to date*/
+    void set_copyright_date(const std::string &copyright_date) {
+        copyright_date_ = Date(copyright_date);
+    }
+
+    /**
+    * @brief Isbn's setter
+    * @param [in] isbn as `Isbn by by const reference`
+    */
+    void set_isbn(const Isbn &isbn) {
+        isbn_ = isbn;
+    }
 
     /// endregion - Setters
 
     ///region - Constructors
 
-    explicit Book(std::string title = "", std::string authorFname = "", std::string authorLname = "",
-         const Date &copyrightDate = Date{}, Status status = AVAILABLE);
-//    explicit Book(std::string title = "", std::string authorFname = "", std::string authorLname = "",
-//                  std::string copyrightDate = "", Status status = AVAILABLE);
+    /**
+     * [Default] Constructor: accept from 0 to 6 arguments
+     * @param [in] authorFname as `std::string by const reference`
+     * @param [in] authorLname as `std::string by const reference`
+     * @param [in] title as `std::string by const reference`
+     * @param [in] isbn as `std::string by const reference`
+     * @param [in] copyrightDate as `std::string by const reference`
+     * @param [in] status as `Status[enum] by value`
+     */
+    explicit Book(const std::string &authorFname = "", const std::string &authorLname = "",
+                  const std::string &title = "",
+                  const std::string &isbn = "000-000-000-a", const std::string &copyrightDate = "1970/01/01",
+                  Status status = AVAILABLE);
+
+    /**
+     * Constructor: accept from 6 arguments
+     * First variation needed to accept isbn as ISBN
+     * @param [in] authorFname as `std::string by const reference`
+     * @param [in] authorLname as `std::string by const reference`
+     * @param [in] title as `std::string by const reference`
+     * @param [in] isbn as `Isbn by const reference`
+     * @param [in] copyrightDate as `std::string by const reference`
+     * @param [in] status as `Status[enum] by value`
+     */
+    Book(const std::string &authorFname, const std::string &authorLname, const std::string &title, const Isbn &isbn,
+         const std::string &copyrightDate, Status status);
+
+    /**
+     * Constructor: accept from 6 arguments
+     * Second variation needed to accept copyrightDate as Date
+     * @param [in] authorFname as `std::string by const reference`
+     * @param [in] authorLname as `std::string by const reference`
+     * @param [in] title as `std::string by const reference`
+     * @param [in] isbn as `std::string by const reference`
+     * @param [in] copyrightDate as `Date by const reference`
+     * @param [in] status as `Status[enum] by value`
+     */
+    Book(const std::string &authorFname, const std::string &authorLname, const std::string &title,
+         const std::string &isbn,
+         const Date &copyrightDate, Status status);
+
+    /**
+     * Constructor: accept from 6 arguments
+     * Third variation needed to accept isbn as ISBN and copyrightDate as Date
+     * @param [in] authorFname as `std::string by const reference`
+     * @param [in] authorLname as `std::string by const reference`
+     * @param [in] title as `std::string by const reference`
+     * @param [in] isbn as `std::string by const reference`
+     * @param [in] copyrightDate as `Date by const reference`
+     * @param [in] status as `Status[enum] by value`
+     */
+    Book(const std::string &authorFname, const std::string &authorLname, const std::string &title, const Isbn &isbn,
+         const Date &copyrightDate, Status status);
+
 
     ///endregion - Constructors
 
 private:
 
-    //ISBN isbn_; // TODO: Implement ISBN class
+    Isbn isbn_;
     std::string title_;
 
     std::string author_fname_; // Author first name
@@ -110,12 +176,39 @@ private:
     Date copyright_date_;
 
     Status status_;
-
 };
 
+
+//region - Operators
+//region - Output Stream
+/**
+ * Book's' stream output operator.
+ * @param os output stream
+ * @param [in] book  as `Book by const reference`
+ * @return
+ */
 std::ostream &operator<<(std::ostream &os, const Book &book);
 
-std::ostream &operator<<(std::ostream &os, Book::Status status);
 
+/**
+ * Book::Status' stream output operator.
+ * @brief Uses a array association to cast the Enum Value to a custom String
+ * @details We decided not to use a ternary operator to ensure greater scalability.
+ * @pro Grater scalability
+ * @cons Necessity to export an array of string as static const
+ * @param os output stream
+ * @param [in] status as `Status by copy`
+ * @return
+ */
+std::ostream &operator<<(std::ostream &os, Book::Status status);
+//endregion
+
+//region - Equality
+bool operator==(const Book &a, const Book &b);
+
+bool operator!=(const Book &a, const Book &b);
+//endregion
+
+//endregion
 
 #endif // BOOK_H
