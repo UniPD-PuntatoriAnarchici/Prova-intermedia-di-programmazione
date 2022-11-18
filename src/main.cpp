@@ -59,6 +59,29 @@ int main() {
     std::cout << "Is Book a != Book b ? " << (a != b) << std::endl;
     std::cout << "Is Book a != Book6 ? " << (a != book6) << std::endl;
 
+    /*
+     * TEST ISBN
+     */
+
+    cout<<"123-634-377-?"<<endl;
+    try{
+        Isbn p1{"123-634-377-?"};
+    }catch(Isbn::ISBN_invalid){
+        cout<<"invalid isbn"<<endl;
+    }
+    cout<<"123-6345377-m"<<endl;
+    try{
+        Isbn p2{"123-6345377-m"};
+    }catch(Isbn::ISBN_invalid){
+        cout<<"invalid isbn"<<endl;
+    }
+    cout<<"123-6a4-377-m"<<endl;
+    try{
+        Isbn p3{"123-6a4-377-m"};
+    }catch(Isbn::ISBN_invalid){
+        cout<<"invalid isbn"<<endl;
+    }
+
     return 0;
 }
 

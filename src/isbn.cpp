@@ -1,5 +1,5 @@
 #include "../include/isbn.h"
-
+#include <sstream> 
 #include <string>
 
 Isbn::Isbn(const std::string Isbn)
@@ -10,24 +10,48 @@ Isbn::Isbn(const std::string Isbn)
 }
 
 bool Isbn::IsValid(std::string isbn) {
-    if (isbn.length() != 13) return false;
-    int start = 0;
-    std::string delimitator = "-";
-    std::string append;
-
-    int end = isbn.find(delimitator);
-    while (end != -1) {
-        append += isbn.substr(start, end - start);
-
-        start = end + delimitator.size();
-        end = isbn.find(delimitator, start);
+    if(isbn.length()!=13)return false;
+    if(isbn.at(3)!='-'||isbn.at(7)!='-'||isbn.at(11)!='-')return false;
+    std::string append="";
+    std::stringstream isbnstream(isbn);
+    std::string el;
+    while (getline(isbnstream,el,'-')){
+        append+=el;
     }
-    for (short i = 0; i < append.length(); i++) {
-        if (!isdigit(append[i])) {
-            return false;
+    for (int i = 0; i < append.length(); i++)
+    {
+        if(i==(append.length()-1)){
+            if(!isalnum(append[i]))return false;
+        }else{
+            if(!isdigit(append[i]))return false;   
         }
+        
     }
-    if (!isalnum(isbn[12])) return false;
+    return true;
+}
+
+bool Isbn::IsValid10(std::string isbn){
+    if(isbn.length()!=13)return false;  
+    if(isbn.at(3)!='-'||isbn.at(7)!='-'||isbn.at(11)!='-')return false;
+    if(tolower(isbn[isbn.length()-1])!='x'&&(isbn[isbn.length()-1]<0||isbn[isbn.length()-1]>9))return false;
+    std::stringstream isbnstream(isbn);
+    std::string el;
+    std::string append="";
+    while (getline(isbnstream,el,'-')){
+        append+=el;
+    }
+    //cout<<append<<endl;
+    int sum=0;
+    for (int i = 0,j=10; i < append.length(); i++,j--){ 
+        if (i==(append.length()-1) && tolower(append[append.length()-1])=='x'){
+            sum+=10;
+            }else{     
+                sum+=(append[i]-48)*j;
+            }       
+            //cout<<"sum:"<<i<<"="<<sum<<endl;   
+    }
+    //cout<<sum<<endl;
+    if((sum%11)!=0)return false;
     return true;
 }
 
