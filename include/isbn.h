@@ -1,10 +1,13 @@
 #ifndef ISBN_H
 #define ISBN_H
+
 #include <string>
+#include <ostream>
 
 class Isbn {
 public:
-    class ISBN_invalid{};
+    class ISBN_invalid {
+    };
 
     Isbn(const std::string Isbn);
 
@@ -19,8 +22,11 @@ public:
 
 private:
     std::string isbn_;
+
     bool IsValid(std::string isbn);
 };
 
+std::ostream &operator<<(std::ostream &os, const Isbn &isbn);
+bool operator==(const Isbn &a, const Isbn &b);
 
 #endif // ISBN_H

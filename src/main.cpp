@@ -21,7 +21,7 @@ int main() {
     } catch (Date::DATE_invalid) {
         cout << "Data invalida" << endl;
     }
-    cout << "Today: " <<  Date::Today() << endl;
+    cout << "Today: " << Date::Today() << endl;
     Date date2{"2001/11/20"};
     cout << date2 << endl;
     try {
@@ -36,19 +36,28 @@ int main() {
      */
     cout << "=== BOOKS TESTS ===" << endl;
     std::vector<Book> shelf(10);
-    //Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
+    Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
 
     Book book1;
-    Book book2{"Titolo"};
-    Book book3{"Titolo", "Nome"};
-    Book book4{"Titolo", "Nome", "Cognome"};
-    Book book5{"Titolo", "Nome", "Cognome", Date{}, Book::LENDING};
+    Book book2{"Nome"};
+    Book book3{"Nome", "Cognome"};
+    Book book4{"Nome", "Cognome", "Titolo"};
+    Book book5{"Nome", "Cognome", "Titolo", "000-000-000-a", "2022/11/17"};
+    Book book6{"Nome", "Cognome", "Titolo", Isbn{"123-456-789-b"}, Date{}, Book::LENDING};
 
     std::cout << book1 << std::endl;
     std::cout << book2 << std::endl;
     std::cout << book3 << std::endl;
     std::cout << book4 << std::endl;
     std::cout << book5 << std::endl;
+    std::cout << book6 << std::endl;
+
+    Book a, b;
+    std::cout << "Is Book a == Book b ? " << (a == b) << std::endl;
+    std::cout << "Is Book a == Book6 ? " << (a == book6) << std::endl;
+
+    std::cout << "Is Book a != Book b ? " << (a != b) << std::endl;
+    std::cout << "Is Book a != Book6 ? " << (a != book6) << std::endl;
 
     return 0;
 }

@@ -3,7 +3,7 @@
 #include <string>
 
 Isbn::Isbn(const std::string Isbn)
-    : isbn_{Isbn} {
+        : isbn_{Isbn} {
     if (!IsValid(isbn_)) {
         throw ISBN_invalid();
     }
@@ -29,4 +29,13 @@ bool Isbn::IsValid(std::string isbn) {
     }
     if (!isalnum(isbn[12])) return false;
     return true;
+}
+
+std::ostream &operator<<(std::ostream &os, const Isbn &isbn) {
+    os << isbn.isbn();
+    return os;
+}
+
+bool operator==(const Isbn &a, const Isbn &b) {
+    return a.isbn() == b.isbn();
 }
