@@ -13,7 +13,7 @@ public:
     };
 
     // default Date is Unix start time
-    Date(const unsigned short day = 1, const Month month = Month::Jan, const long year = 1970);
+    Date(const unsigned short &day = 1, const Month &month = Month::Jan, const long &year = 1970);
     Date(const std::string &date);
 
     /// region - Getters
@@ -29,14 +29,14 @@ public:
 
     /// region - Setters
 
-    void set_day(const unsigned short day) { day_ = day; }
+    void set_day(const unsigned short &day) { day_ = day; }
 
-    void set_month(const Month month) { month_ = month; }
+    void set_month(const Month &month) { month_ = month; }
 
-    void set_year(const long year) { year_ = year; }
+    void set_year(const long &year) { year_ = year; }
     /// endregion - Setters
 
-    static bool IsLeapYear(const long year);
+    static bool IsLeapYear(const long &year);
 
     static Date Today(void);
 
@@ -47,7 +47,8 @@ private:
     
     std::string months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-    bool IsValid(const unsigned short day, const Month month, const long year);
+    static bool IsValid(const unsigned short &day, const Month &month, const long &year);
+    static unsigned short IntToUshortDay(int &unsafe_int);
 };
 
 std::ostream &operator<<(std::ostream &os, Date date);
