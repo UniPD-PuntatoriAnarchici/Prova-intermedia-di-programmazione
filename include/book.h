@@ -163,7 +163,21 @@ public:
          const Date &copyrightDate, Status status);
 
 
-    ///endregion - Constructors
+    // endregion - Constructors
+
+    ///region - utilities
+
+    void setAvailable(void) {
+        status_ = Status::AVAILABLE;
+        return;
+    }
+
+    void setLending(void) {
+        status_ = Status::LENDING;
+        return;
+    }
+
+    ///endregion
 
 private:
 

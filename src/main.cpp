@@ -9,26 +9,24 @@ int main() {
     /*
      * TEST ISBN
      */
-    cout << "123-634-377-?" << endl;
+    cout << "=== ISBN TESTS ===" << endl;
     try {
         Isbn p1{"123-634-377-?"};
     } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
-    cout << "123-6345377-m" << endl;
     try {
         Isbn p2{"123-6345377-m"};
     } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
-    cout << "123-6a4-377-m" << endl;
     try {
         Isbn p3{"123-6a4-377-m"};
     } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
     Isbn p4{"887-521-837-4"};
-    cout << "IsValid: " << p4 << " -> " << p4.IsValid(p4.isbn()) << endl;
+    cout <<  p4 << endl;
     cout << endl;
 
     /* 

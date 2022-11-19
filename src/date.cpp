@@ -4,9 +4,9 @@
 #include <ctime>
 #include <sstream>
 
-Date::Date(const unsigned short day, const Month month, const long year)
+Date::Date(const unsigned short &day, const Month &month, const long &year)
         : day_{day}, month_{month}, year_{year} {
-    if (!IsValid(day, month, year)) throw DATE_invalid();
+    if (!Date::IsValid(day, month, year)) throw DATE_invalid();
 }
 
 Date::Date(const std::string &date) {
@@ -21,15 +21,12 @@ Date::Date(const std::string &date) {
         elems[i] = elem;
     }
 
-    // checking int to unsigned short cast
-    int safe_day = stoi(elems[2]);
-    if (safe_day < 0 || safe_day > 65535) throw DATE_invalid();
-
-    day_ = safe_day;
+    int unsafe_day = stoi(elems[2]);
+    day_ = Date::IntToUshortDay(unsafe_day);
     month_ = Month(std::stoi(elems[1]));
     year_ = std::stoi(elems[0]);
 
-    if (!IsValid(day_, month_, year_)) throw DATE_invalid();
+    if (!Date::IsValid(day_, month_, year_)) throw DATE_invalid();
 }
 
 /**
@@ -40,7 +37,7 @@ Date::Date(const std::string &date) {
  * @param year year
  * @return true if date is valid, false otherways
 */
-bool Date::IsValid(const unsigned short day, const Month month, const long year) {
+bool Date::IsValid(const unsigned short &day, const Month &month, const long &year) {
     if (day <= 0) return false;
     if (month < Month::Jan || month > Month::Dec) return false;
 
@@ -48,7 +45,7 @@ bool Date::IsValid(const unsigned short day, const Month month, const long year)
 
     switch (month) {
         case Month::Feb:
-            days_in_month = (IsLeapYear(year)) ? 29 : 28;
+            days_in_month = (Date::IsLeapYear(year)) ? 29 : 28;
             break;
         case Month::Apr:
         case Month::Jun:
@@ -69,7 +66,7 @@ bool Date::IsValid(const unsigned short day, const Month month, const long year)
  * @param year year to check
  * @return true if it's a leap year, faslse if it's not
 */
-bool Date::IsLeapYear(const long year) {
+bool Date::IsLeapYear(const long &year) {
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) return true;
     return false;
 }
@@ -83,9 +80,22 @@ bool Date::IsLeapYear(const long year) {
 Date Date::Today(void) {
     time_t now = time(0); // seconds offset since 1 Jan 1970
     tm *ltm = localtime(&now); // ltm is local time abbreviated
-    return Date{static_cast<unsigned short>(ltm->tm_mday), Month(ltm->tm_mon), (1900 + ltm->tm_year)};
+    
+    unsigned short safe_day = IntToUshortDay(ltm->tm_mday);
+
+    return Date{safe_day, Month(ltm->tm_mon), (1900 + ltm->tm_year)};
 }
 
 std::ostream &operator<<(std::ostream &os, Date date) {
     return os << date.day() << " " << date.month() << " " << date.year();
+}
+
+/**
+ * @brief function member to do a safe int to unsigned short cast for the day of the month
+ * @param unsafe_int the int variable to check
+ * @return the unsigned short which has been casted safely
+*/
+unsigned short Date::IntToUshortDay(int &unsafe_int) {
+    if (unsafe_int < 0 || unsafe_int > 65535) throw Date::DATE_invalid();
+    return static_cast<unsigned short>(unsafe_int); // now it's safe because i checked bounds
 }
