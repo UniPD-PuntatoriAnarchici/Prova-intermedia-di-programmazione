@@ -2,6 +2,11 @@
 #include <sstream> 
 #include <string>
 
+/**
+ * Constructor: sets an ISBN, passed by parameter,if valid
+ * @param isbn as 'std::string by const reference'
+ * @throws ISBN_invalid if ISBN is invalid
+*/
 Isbn::Isbn(const std::string &isbn)
         : isbn_{isbn} {
     if (!IsValid(isbn_)) throw ISBN_invalid();
