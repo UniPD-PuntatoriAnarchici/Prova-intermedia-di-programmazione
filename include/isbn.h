@@ -22,8 +22,6 @@ public:
     bool IsValid(std::string isbn);
 private:
     std::string isbn_;
-
-    bool IsValid10(std::string isbn);
 };
 
 std::ostream &operator<<(std::ostream &os, const Isbn &isbn);
