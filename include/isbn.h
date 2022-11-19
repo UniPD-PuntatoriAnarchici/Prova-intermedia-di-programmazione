@@ -18,8 +18,8 @@ public:
     void set_isbn(std::string Isbn) { isbn_ = Isbn; }
     /// endregion - Setters
 
-
     bool IsValid(std::string isbn);
+
 private:
     std::string isbn_;
 };

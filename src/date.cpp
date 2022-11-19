@@ -11,13 +11,13 @@ Date::Date(const unsigned short &day, const Month &month, const long &year)
 
 Date::Date(const std::string &date) {
     std::string elems[3] = {"", "", ""};
-    std::stringstream ss(date);
+    std::stringstream date_stream(date);
     std::string elem;
 
     // std::getline() reads characters from an input stream and places  
     // them into a string
     for (short i = 0; i < 3; i++) {
-        std::getline(ss, elem, '/');
+        std::getline(date_stream, elem, '/');
         elems[i] = elem;
     }
 
