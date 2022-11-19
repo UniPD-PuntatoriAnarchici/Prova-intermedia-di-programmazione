@@ -17,8 +17,9 @@ bool Isbn::IsValid(std::string isbn) {
         append+=el;
     }
     for (int i = 0; i < append.length(); i++) {
-        if(i==(append.length()-1))
-            if(!isalnum(append[i]) || !isdigit(append[i]))return false;
+        if(i==(append.length()-1)) return  isalnum(append[i]);
+        else
+            if(!isdigit(append[i]))return false;
     }
     return true;
 }
