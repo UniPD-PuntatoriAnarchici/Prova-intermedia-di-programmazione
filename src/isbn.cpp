@@ -7,6 +7,12 @@ Isbn::Isbn(const std::string Isbn)
     if (!IsValid(isbn_)) throw ISBN_invalid();
 }
 
+/**
+ * @brief Checks if a isbn is valid.This means that the length must be 13,
+ * the first nine positions must be numbers (0-9) while the last can also be a letter
+ * @param isbn as 'std::string'
+ * @return true if isbn is valid,otherwise false
+*/
 bool Isbn::IsValid(std::string isbn) {
     if (isbn.length() != 13) return false;
     if (isbn.at(3) != '-' || isbn.at(7) != '-' || isbn.at(11) != '-') return false;
@@ -18,32 +24,8 @@ bool Isbn::IsValid(std::string isbn) {
     }
     for (int i = 0; i < append.length(); i++) {
         if(i==(append.length()-1)) return  isalnum(append[i]);
-        else
-            if(!isdigit(append[i]))return false;
+        else if(!isdigit(append[i]))return false;
     }
-    return true;
-}
-
-bool Isbn::IsValid10(std::string isbn){
-    if (isbn.length() != 13) return false;
-    if (isbn.at(3) != '-' || isbn.at(7) != '-' || isbn.at(11) != '-') return false;
-    if (tolower(isbn[isbn.length() - 1]) != 'x' && (isbn[isbn.length() - 1] < 0 || isbn[isbn.length() - 1] > 9)) return false;
-    std::stringstream isbnstream(isbn);
-    std::string el;
-    std::string append="";
-    while (getline(isbnstream,el,'-'))
-        append += el;
-    //cout<<append<<endl;
-    int sum=0;
-    for (int i = 0,j=10; i < append.length(); i++,j--){ 
-        if (i==(append.length()-1) && tolower(append[append.length()-1])=='x')
-            sum+=10;
-        else
-            sum+=(append[i]-48)*j;
-        //cout<<"sum:"<<i<<"="<<sum<<endl;   
-    }
-    //cout<<sum<<endl;
-    if ((sum % 11) != 0) return false;
     return true;
 }
 
