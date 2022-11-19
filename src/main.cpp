@@ -6,6 +6,31 @@
 using namespace std;
 
 int main() {
+    /*
+     * TEST ISBN
+     */
+    cout << "123-634-377-?" << endl;
+    try{
+        Isbn p1{"123-634-377-?"};
+    }catch(Isbn::ISBN_invalid){
+        cout << "invalid isbn" << endl;
+    }
+    cout << "123-6345377-m" << endl;
+    try{
+        Isbn p2{"123-6345377-m"};
+    }catch(Isbn::ISBN_invalid){
+        cout << "invalid isbn" << endl;
+    }
+    cout << "123-6a4-377-m" << endl;
+    try{
+        Isbn p3{"123-6a4-377-m"};
+    }catch(Isbn::ISBN_invalid){
+        cout << "invalid isbn" << endl;
+    }
+    Isbn p4{"887-521-837-4"};
+    cout << "IsValid: " << p4 << " -> " << p4.IsValid(p4.isbn()) << endl;
+    cout << endl;
+
     /* 
      * DATE TESTING
      */
@@ -42,8 +67,8 @@ int main() {
     Book book2{"Nome"};
     Book book3{"Nome", "Cognome"};
     Book book4{"Nome", "Cognome", "Titolo"};
-    Book book5{"Nome", "Cognome", "Titolo", "000-000-000-a", "2022/11/17"};
-    Book book6{"Nome", "Cognome", "Titolo", Isbn{"123-456-789-b"}, Date{}, Book::LENDING};
+    Book book5{"Nome", "Cognome", "Titolo", "000-000-000-0", "2022/11/17"};
+    Book book6{"Nome", "Cognome", "Titolo", Isbn{"123-456-789-X"}, Date{}, Book::LENDING};
 
     std::cout << book1 << std::endl;
     std::cout << book2 << std::endl;
@@ -58,29 +83,6 @@ int main() {
 
     std::cout << "Is Book a != Book b ? " << (a != b) << std::endl;
     std::cout << "Is Book a != Book6 ? " << (a != book6) << std::endl;
-
-    /*
-     * TEST ISBN
-     */
-
-    cout<<"123-634-377-?"<<endl;
-    try{
-        Isbn p1{"123-634-377-?"};
-    }catch(Isbn::ISBN_invalid){
-        cout<<"invalid isbn"<<endl;
-    }
-    cout<<"123-6345377-m"<<endl;
-    try{
-        Isbn p2{"123-6345377-m"};
-    }catch(Isbn::ISBN_invalid){
-        cout<<"invalid isbn"<<endl;
-    }
-    cout<<"123-6a4-377-m"<<endl;
-    try{
-        Isbn p3{"123-6a4-377-m"};
-    }catch(Isbn::ISBN_invalid){
-        cout<<"invalid isbn"<<endl;
-    }
 
     return 0;
 }

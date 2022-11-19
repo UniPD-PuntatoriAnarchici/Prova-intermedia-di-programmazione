@@ -6,8 +6,7 @@
 
 class Isbn {
 public:
-    class ISBN_invalid {
-    };
+    class ISBN_invalid {};
 
     Isbn(const std::string Isbn);
 
@@ -20,10 +19,10 @@ public:
     /// endregion - Setters
 
 
+    bool IsValid(std::string isbn);
 private:
     std::string isbn_;
 
-    bool IsValid(std::string isbn);
     bool IsValid10(std::string isbn);
 };
 
