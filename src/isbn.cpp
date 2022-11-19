@@ -14,17 +14,21 @@ Isbn::Isbn(const std::string Isbn)
  * @return true if isbn is valid,otherwise false
 */
 bool Isbn::IsValid(std::string isbn) {
-    if (isbn.length() != 13) return false;
+    constexpr unsigned short ISBN_LENGTH = 13;
+    if (isbn.length() != ISBN_LENGTH) return false;
     if (isbn.at(3) != '-' || isbn.at(7) != '-' || isbn.at(11) != '-') return false;
-    std::string append="";
-    std::stringstream isbnstream(isbn);
-    std::string el;
-    while (getline(isbnstream,el,'-')) {
-        append+=el;
-    }
-    for (int i = 0; i < append.length(); i++) {
-        if(i==(append.length()-1)) return  isalnum(append[i]);
-        else if(!isdigit(append[i]))return false;
+    std::string unformatted_isbn = ""; // string which contains the isbn without the hyphens
+    std::stringstream isbn_stream(isbn);
+    std::string elem;
+
+    // joining isbn digits
+    while (getline(isbn_stream, elem, '-'))
+        unformatted_isbn += elem;
+    
+    for (int i = 0; i < unformatted_isbn.length(); i++) {
+        // if on the last digit checks that the digit is alphanumeric, else check if isdigit
+        if (i == (unformatted_isbn.length() - 1)) return isalnum(unformatted_isbn[i]);
+        else if (!isdigit(unformatted_isbn[i])) return false;
     }
     return true;
 }
