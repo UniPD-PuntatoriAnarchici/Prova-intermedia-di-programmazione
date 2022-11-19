@@ -10,21 +10,21 @@ int main() {
      * TEST ISBN
      */
     cout << "123-634-377-?" << endl;
-    try{
+    try {
         Isbn p1{"123-634-377-?"};
-    }catch(Isbn::ISBN_invalid){
+    } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
     cout << "123-6345377-m" << endl;
-    try{
+    try {
         Isbn p2{"123-6345377-m"};
-    }catch(Isbn::ISBN_invalid){
+    } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
     cout << "123-6a4-377-m" << endl;
-    try{
+    try {
         Isbn p3{"123-6a4-377-m"};
-    }catch(Isbn::ISBN_invalid){
+    } catch (Isbn::ISBN_invalid) {
         cout << "invalid isbn" << endl;
     }
     Isbn p4{"887-521-837-4"};
@@ -68,6 +68,8 @@ int main() {
     Book book3{"Nome", "Cognome"};
     Book book4{"Nome", "Cognome", "Titolo"};
     Book book5{"Nome", "Cognome", "Titolo", "000-000-000-0", "2022/11/17"};
+    Book book7{"Nome", "Cognome", "Titolo", "000-000-000-0", "2022/11/17", Book::LENDING};
+
     Book book6{"Nome", "Cognome", "Titolo", Isbn{"123-456-789-X"}, Date{}, Book::LENDING};
 
     std::cout << book1 << std::endl;
@@ -75,6 +77,7 @@ int main() {
     std::cout << book3 << std::endl;
     std::cout << book4 << std::endl;
     std::cout << book5 << std::endl;
+    std::cout << book7 << std::endl;
     std::cout << book6 << std::endl;
 
     Book a, b;

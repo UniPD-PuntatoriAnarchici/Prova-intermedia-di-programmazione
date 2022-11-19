@@ -105,10 +105,15 @@ std::ostream &operator<<(std::ostream &os, Book::Status status) {
  * @return
  */
 std::ostream &operator<<(std::ostream &os, const Book &book) {
+    if (book.title().empty() && book.author_fname().empty() && book.author_lname().empty())
+        return os << "--    Book    --" << std::endl
+                  << "<book not initialized" << std::endl
+                  << "-- End of Book --" << std::endl;
+
     return os << "--    Book    --" << std::endl
               << "- Title: " << book.title() << std::endl
               << "- Author: " << book.author_fname() << " " << book.author_lname() << std::endl
-              << "- ISBN: " << book.isbn() << std::endl
+              << "- ISBN: " << (book.isbn() == Isbn{"000-000-000-a"} ? "null" : book.isbn().isbn()) << std::endl
               << "- Copyright: " << book.copyright_date() << std::endl
               << "- Availability: " << book.status() << std::endl /* TODO: Remove this line!*/
               << "-- End of Book --" << std::endl;
