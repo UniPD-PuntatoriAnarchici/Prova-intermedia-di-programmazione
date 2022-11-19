@@ -10,21 +10,26 @@ int main() {
      * TEST ISBN
      */
     cout << "=== ISBN TESTS ===" << endl;
+    // default isbn
+    Isbn default_isbn{};
+    cout << "default isbn: " << default_isbn << endl;
+    // some invalid isbns
     try {
         Isbn p1{"123-634-377-?"};
     } catch (Isbn::ISBN_invalid) {
-        cout << "invalid isbn" << endl;
+        cout << "Invalid isbn" << endl;
     }
     try {
         Isbn p2{"123-6345377-m"};
     } catch (Isbn::ISBN_invalid) {
-        cout << "invalid isbn" << endl;
+        cout << "Invalid isbn" << endl;
     }
     try {
         Isbn p3{"123-6a4-377-m"};
     } catch (Isbn::ISBN_invalid) {
-        cout << "invalid isbn" << endl;
+        cout << "Invalid isbn" << endl;
     }
+    // a valid isbn
     Isbn p4{"887-521-837-4"};
     cout <<  p4 << endl;
     cout << endl;
@@ -33,24 +38,31 @@ int main() {
      * DATE TESTING
      */
     cout << "=== DATES TESTS ===" << endl;
+    // default date
     Date default_date{};
-    cout << default_date << endl;
+    cout << "default date: " << default_date << endl;
+    // leap year tests
     cout << "IsLeapYear(2022) -> " << Date::IsLeapYear(2022) << endl;
     cout << "IsLeapYear(2012) -> " << Date::IsLeapYear(2012) << endl;
-    Date date1{20, Date::Month::Nov, 2001};
-    cout << date1 << endl;
+    // an invalid date
     try {
-        Date date2{30, Date::Month::Feb, 2022};
+        Date date1{30, Date::Month::Feb, 2022};
     } catch (Date::DATE_invalid) {
-        cout << "Data invalida" << endl;
+        cout << "Invalid date" << endl;
     }
-    cout << "Today: " << Date::Today() << endl;
-    Date date2{"2001/11/20"};
+    // a valid date
+    Date date2{20, Date::Month::Nov, 2001};
     cout << date2 << endl;
+    // today's date
+    cout << "Today: " << Date::Today() << endl;
+    // date as a string with format yyyy/mm/dd
+    Date date3{"2001/11/20"};
+    cout << date3 << endl;
+    // invalid string date
     try {
         Date date3{"2022/13/14"};
     } catch (Date::DATE_invalid) {
-        cout << "Data invalida" << endl;
+        cout << "Invalid date" << endl;
     }
     cout << endl;
 
@@ -58,9 +70,11 @@ int main() {
      * MINIMAL TESTING
      */
     cout << "=== BOOKS TESTS ===" << endl;
+    // required tests
     std::vector<Book> shelf(10);
     Book my_favourite_book("David", "Foster Wallace", "Una cosa divertente che non farò mai più", "887-521-837-4");
 
+    // default constructor tests
     Book book1;
     Book book2{"Nome"};
     Book book3{"Nome", "Cognome"};
@@ -78,6 +92,7 @@ int main() {
     std::cout << book7 << std::endl;
     std::cout << book6 << std::endl;
 
+    // operators overload tests
     Book a, b;
     std::cout << "Is Book a == Book b ? " << (a == b) << std::endl;
     std::cout << "Is Book a == Book6 ? " << (a == book6) << std::endl;

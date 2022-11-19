@@ -8,7 +8,7 @@ class Isbn {
 public:
     class ISBN_invalid {};
 
-    Isbn(const std::string Isbn);
+    Isbn(const std::string &Isbn = "000-000-000-a");
 
     /// region - Getters
     const std::string &isbn() const { return isbn_; }
@@ -18,10 +18,10 @@ public:
     void set_isbn(std::string Isbn) { isbn_ = Isbn; }
     /// endregion - Setters
 
-    bool IsValid(std::string isbn);
 
 private:
     std::string isbn_;
+    bool IsValid(std::string isbn);
 };
 
 std::ostream &operator<<(std::ostream &os, const Isbn &isbn);
