@@ -47,7 +47,7 @@ private:
 
     std::string months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-    static bool IsValid(const unsigned short &day, const Month &month, const long &year);
+    bool IsValid(const unsigned short &day, const Month &month, const long &year);
     static unsigned short IntToUshortDay(int &unsafe_int);
 };
 

@@ -2,8 +2,8 @@
 #include <sstream> 
 #include <string>
 
-Isbn::Isbn(const std::string Isbn)
-        : isbn_{Isbn} {
+Isbn::Isbn(const std::string &isbn)
+        : isbn_{isbn} {
     if (!IsValid(isbn_)) throw ISBN_invalid();
 }
 
