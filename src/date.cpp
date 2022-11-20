@@ -4,7 +4,7 @@
 #include <ctime>
 #include <sstream>
 
-Date::Date(const unsigned short &day, const Month &month, const long &year)
+Date::Date(const unsigned short day, const Month &month, const long year)
         : day_{day}, month_{month}, year_{year} {
     if (!Date::IsValid(day, month, year)) throw DATE_invalid();
 }
@@ -37,7 +37,7 @@ Date::Date(const std::string &date) {
  * @param year year
  * @return true if date is valid, false otherways
 */
-bool Date::IsValid(const unsigned short &day, const Month &month, const long &year) {
+bool Date::IsValid(const unsigned short day, const Month &month, const long year) {
     if (day <= 0) return false;
     if (month < Month::Jan || month > Month::Dec) return false;
 
@@ -66,7 +66,7 @@ bool Date::IsValid(const unsigned short &day, const Month &month, const long &ye
  * @param year year to check
  * @return true if it's a leap year, faslse if it's not
 */
-bool Date::IsLeapYear(const long &year) {
+bool Date::IsLeapYear(const long year) {
     if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) return true;
     return false;
 }
@@ -86,7 +86,7 @@ Date Date::Today(void) {
     return Date{safe_day, Month(ltm->tm_mon), (1900 + ltm->tm_year)};
 }
 
-std::ostream &operator<<(std::ostream &os, Date date) {
+std::ostream &operator<<(std::ostream &os, const Date &date) {
     return os << date.day() << " " << date.month() << " " << date.year();
 }
 
@@ -95,7 +95,7 @@ std::ostream &operator<<(std::ostream &os, Date date) {
  * @param unsafe_int the int variable to check
  * @return the unsigned short which has been casted safely
 */
-unsigned short Date::IntToUshortDay(int &unsafe_int) {
+unsigned short Date::IntToUshortDay(int unsafe_int) {
     if (unsafe_int < 0 || unsafe_int > 65535) throw Date::DATE_invalid();
     return static_cast<unsigned short>(unsafe_int); // now it's safe because i checked bounds
 }
