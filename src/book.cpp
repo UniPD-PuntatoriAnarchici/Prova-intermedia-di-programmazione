@@ -2,7 +2,7 @@
 
 //region - Static data members
 
-const std::string Book::Status_Map[] = {"LENDING", "AVAILABLE"};
+const std::string Book::STATUS_MAP[] = {"LENDING", "AVAILABLE"};
 
 //endregion
 
@@ -94,7 +94,7 @@ Book::Book(const std::string &authorFname, const std::string &authorLname, const
  * @return
  */
 std::ostream &operator<<(std::ostream &os, Book::Status status) {
-    return os << Book::Status_Map[status];
+    return os << Book::STATUS_MAP[status];
     //return os << (status == Book::Status::AVAILABLE ? "AVAILABLE" : "LENDING"); //Alternative solution
 }
 
