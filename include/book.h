@@ -12,7 +12,7 @@ public:
         LENDING,
         AVAILABLE
     };
-    static const std::string Status_Map[];
+    static const std::string STATUS_MAP[];
 
     /// region - Getters
 
