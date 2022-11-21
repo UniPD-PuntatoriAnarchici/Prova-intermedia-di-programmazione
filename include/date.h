@@ -1,7 +1,7 @@
 #ifndef DATE_H
 #define DATE_H
 
-#include <ostream>
+#include <iostream>
 #include <string>
 
 class Date {
@@ -11,6 +11,7 @@ public:
     enum Month {
         Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
     };
+    static const std::string MONTHS_MAP[];
 
     // default Date is Unix start time
     Date(const unsigned short day = 1, const Month &month = Month::Jan, const long year = 1970);
@@ -72,8 +73,6 @@ private:
     unsigned short day_;
     Month month_;
     long year_;
-
-    std::string MONTHS_MAP[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     bool IsValid(const unsigned short day, const Month &month, const long year);
     static unsigned short IntToUshortDay(int unsafe_int);
