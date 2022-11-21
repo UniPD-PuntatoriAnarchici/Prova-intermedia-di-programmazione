@@ -1,8 +1,17 @@
 #include "../include/date.h"
 
 #include <iostream>
+#include <string>
 #include <ctime>
 #include <sstream>
+
+//region - Static data members
+
+const std::string MONTHS_MAP[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+
+//endregion
+
+//region - Constructors
 
 Date::Date(const unsigned short day, const Month &month, const long year)
         : day_{day}, month_{month}, year_{year} {
@@ -28,6 +37,8 @@ Date::Date(const std::string &date) {
 
     if (!Date::IsValid(day_, month_, year_)) throw DATE_invalid();
 }
+
+//endregion
 
 /**
  * @brief Checks if a date is valid. This means day between 0 and 31 with edge cases
