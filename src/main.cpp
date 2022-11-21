@@ -36,6 +36,58 @@ int main() {
     //region @Automatic basic tes
 
     Book test;
+
+    //region - Default value
+
+    cout << "===== DEFAULT VALUE =======" << std::endl;
+    cout << "Default Title: ";
+    if (test.title().empty()) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Default Author First Name: ";
+    if (test.author_fname().empty()) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Default Author Last Name: ";
+    if (test.author_lname().empty()) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Default ISBN: ";
+    if (test.isbn() == Isbn{"000-000-000-a"}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Default copyright Date: ";
+    if (test.copyright_date() == Date{}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Default status: ";
+    if (test.status() == Book::AVAILABLE) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "===== END DEFAULT VALUE =======" << std::endl;
+
+    //endregion
+
+    //region - Setter/Getter
+    cout << "===== Setter/Getter =======" << std::endl;
     cout << "Title: ";
     test.set_title("TITLE");
     if (test.title() == "TITLE") {
@@ -59,6 +111,96 @@ int main() {
     } else {
         passed(false, cout);
     }
+
+    cout << "ISBN - string: ";
+    test.set_isbn("123-456-789-a");
+    if (test.isbn() == Isbn{"123-456-789-a"}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "ISBN - object: ";
+    test.set_isbn(Isbn{"987-654-321-b"});
+    if (test.isbn() == Isbn{"987-654-321-b"}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Copyright Date string: ";
+    test.set_copyright_date("12-10-1990");
+    if (test.copyright_date() == Date{"12-10-1990"}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Copyright Date object: ";
+    test.set_copyright_date(Date{"12-10-1990"});
+    if (test.copyright_date() == Date{"12-10-1990"}) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Status: ";
+    test.set_status(Book::LENDING);
+    if (test.status() == Book::LENDING) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "===== END Setter/Getter =======" << std::endl;
+    //endregion
+
+    //region - Status Function
+
+    cout << "===== Status Function =======" << std::endl;
+
+    cout << "Set available: ";
+    test.setAvailable();
+    if (test.status() == Book::AVAILABLE) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Set lending: ";
+    test.setLending();
+    if (test.status() == Book::LENDING) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "===== END Status Function =======" << std::endl;
+    //endregion
+
+    //region - Invalid Status
+    cout << "===== Invalid Status =====" << std::endl;
+
+    cout << "Date - string";
+    try {
+        test.set_copyright_date("aaaa");
+        passed(false, cout);
+    } catch (const std::exception &ex) {
+        passed(true, cout);
+    }
+
+
+    cout << "Set lending: ";
+    test.setLending();
+    if (test.status() == Book::LENDING) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "===== END Status Function =======" << std::endl;
+    //endregion
+
 
     //endregion
 

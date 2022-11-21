@@ -104,6 +104,14 @@ public:
         isbn_ = isbn;
     }
 
+    /**
+    * @brief Isbn's setter
+    * @param [in] isbn as `std::string by by const reference`
+    */
+    void set_isbn(const std::string &isbn) {
+        isbn_ = Isbn{isbn};
+    }
+
     /// endregion - Setters
 
     ///region - Constructors
