@@ -93,7 +93,7 @@ public:
     * @param [in] copyright_date as `std::string by const reference`
     */
     void set_copyright_date(const std::string &copyright_date) {
-        copyright_date_ = Date(copyright_date);
+        copyright_date_ = Date{copyright_date};
     }
 
     /**

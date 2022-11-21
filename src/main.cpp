@@ -33,7 +33,7 @@ void passed(bool passed, std::ostream &os) {
 
 int main() {
 
-    //region @Automatic basic tes
+    //region @Automatic basic tests
 
     Book test;
 
@@ -181,7 +181,7 @@ int main() {
     //region - Invalid Status
     cout << "===== Invalid Status =====" << std::endl;
 
-    cout << "Date - string";
+    cout << "Date - string: ";
     try {
         test.set_copyright_date("aaaa");
         passed(false, cout);
@@ -189,13 +189,29 @@ int main() {
         passed(true, cout);
     }
 
-
-    cout << "Set lending: ";
-    test.setLending();
-    if (test.status() == Book::LENDING) {
-        passed(true, cout);
-    } else {
+    cout << "Date - object: ";
+    try {
+        test.set_copyright_date(Date{"aaaa"});
         passed(false, cout);
+    } catch (const std::exception &ex) {
+        passed(true, cout);
+    }
+//
+//    cout << "Isbn - string: ";
+//    try {
+//        test.set_isbn("aaaa");
+//        passed(false, cout);
+//    } catch (const std::exception &ex) {
+//        passed(true, cout);
+//    }
+//
+
+    cout << "Isbn - object: ";
+    try {
+        test.set_isbn(Isbn{"aaaa"});
+        passed(false, cout);
+    } catch (const std::exception &ex) {
+        passed(true, cout);
     }
 
     cout << "===== END Status Function =======" << std::endl;

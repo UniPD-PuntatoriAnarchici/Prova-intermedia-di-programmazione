@@ -1,5 +1,5 @@
 #include "../include/isbn.h"
-#include <sstream> 
+#include <sstream>
 #include <string>
 
 /**
@@ -9,7 +9,8 @@
 */
 Isbn::Isbn(const std::string &isbn)
         : isbn_{isbn} {
-    if (!IsValid(isbn_)) throw ISBN_invalid();
+    if (!Isbn::IsValid(isbn_)) throw ISBN_invalid();
+
 }
 
 /**
@@ -29,7 +30,7 @@ bool Isbn::IsValid(std::string isbn) {
     // joining isbn digits
     while (getline(isbn_stream, elem, '-'))
         unformatted_isbn += elem;
-    
+
     for (int i = 0; i < unformatted_isbn.length(); i++) {
         // if on the last digit checks that the digit is alphanumeric, else check if isdigit
         if (i == (unformatted_isbn.length() - 1)) return isalnum(unformatted_isbn[i]);
