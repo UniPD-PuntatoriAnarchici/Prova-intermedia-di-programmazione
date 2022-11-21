@@ -41,7 +41,7 @@ At the end of the process you should be in a very similar situation
 - [x] Data di copyright – la data è rappresentata usando una apposita classe Date simile a quella sviluppata a lezione;
 - [x] Stato in prestito / disponibile
 
-##### - [ ] Il codice ISBN può essere rappresentata mediante una std::string oppure una classe dedicata. In ogni caso, l’ISBN deve avere il formato n-n-n-x, con n intero e x una singola cifra o una lettera (i quattro campi sono separati da un carattere ‘-’).
+##### Il codice ISBN può essere rappresentata mediante una std::string oppure una classe dedicata. In ogni caso, l’ISBN deve avere il formato n-n-n-x, con n intero e x una singola cifra o una lettera (i quattro campi sono separati da un carattere ‘-’).
 - [x] Done
 ##### La classe Book deve essere dotata di:
 - [x] Funzioni membro che ritornano i vari campi

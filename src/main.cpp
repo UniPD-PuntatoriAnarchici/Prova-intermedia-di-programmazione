@@ -5,7 +5,64 @@
 
 using namespace std;
 
+int passedCounter = 0;
+int failedCounter = 0;
+
+void passed(bool passed, std::ostream &os) {
+#ifdef __linux__
+    if (passed) {
+        os << "\033[1;32m PASSED \033[0m";
+        passedCounter++;
+    } else {
+        os << "\033[1;31m FAILED \033[0m";
+        failedCounter++;
+    }
+#else
+    if (passed) {
+        os << "PASSED";
+        passedCounter++;
+    } else {
+        os << "FAILED";
+        failedCounter++;
+    }
+#endif
+
+    os << std::endl;
+    return;
+}
+
 int main() {
+
+    //region @Automatic basic tes
+
+    Book test;
+    cout << "Title: ";
+    test.set_title("TITLE");
+    if (test.title() == "TITLE") {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Author First Name: ";
+    test.set_author_fname("FNAME");
+    if (test.author_fname() == "FNAME") {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    cout << "Author Last Name: ";
+    test.set_author_lname("LNAME");
+    if (test.author_lname() == "LNAME") {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+    //endregion
+
+
     /*
      * TEST ISBN
      */
@@ -31,7 +88,7 @@ int main() {
     }
     // a valid isbn
     Isbn p4{"887-521-837-4"};
-    cout <<  p4 << endl;
+    cout << p4 << endl;
     cout << endl;
 
     /* 
