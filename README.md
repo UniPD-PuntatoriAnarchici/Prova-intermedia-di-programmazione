@@ -4,7 +4,7 @@
 
 ### 1. How to Compile:
 
-**In main directory**
+**While you are in the main directory**
 
 - Launch `cmake . -B <cmake-configuration-folder>`. This will create the cmake configuration folder. Note: this can't be
   named `bin`
@@ -17,23 +17,56 @@ At the end of the process you should be in a very similar situation
 │   README.md
 │   .gitignore
 │   CMakeLists.txt    
+|   statement.pdf
 │
 └───include
-│   │   ...
+│   │   .h files
 │
 └───src
-│   │   ...
+│   │   .cpp files
 │   
 └───<cmake-configuration-folder>
-│   │   ...
+│   │    <cmake configuration files>
 │
 └───bin
 │   │   <executable>
 │   
 ```
+
 ---
 
-### 2. Statement ToDo
+### 2. Designer Notes
+
+#### 2.1. GIT
+
+We decided to use Git as dVCS and [GitHub](https://github.com/) as remote host. So we founded an [organization](https://github.com/UniPD-Segmentation-Fault-Core-Dumped) and created a [repository](https://github.com/UniPD-Segmentation-Fault-Core-Dumped/Prova-intermedia-di-programmazione).
+
+In order to keep development simpler and more straightforward, we decided to use one main branch (main) and one branch per developer. For the same reason we also decided to use the following procedure:
+
+- Pull from remote main branch.
+- Switch to personal branch
+- Merge/Rebase to align.
+- Local development
+- Add, commit
+- Push to remote personal branch *(This is to have dual control and avoid a direct push to the master)*
+- Pull request and merge request directly in the remote.
+
+In this way we were able to maintain the linearity of the main branch without overlapping everyone's work.
+
+![Network Graph](/res/NetworkGraph.png)
+
+#### 2.2 Copy constructor
+
+We decided not to implement the copy constructor because the default c++ copy constructor already does what it's needed
+
+
+#### 2.3 Move semantics 
+
+We decided not to implement the move constructor because the default c++ move constructor already does what it's needed
+
+---
+
+### 3. Statement ToDo
 ##### Progettare e implementare la classe Book che rappresenta un libro in una biblioteca. Tale classe ha membri per contenere:
 - [x] ISBN
 - [x] Titolo
@@ -62,25 +95,3 @@ At the end of the process you should be in a very similar situation
 - [x] `std::vector<Book> shelf(10)`;
 - [x] `Book my_favourite_book(“David”, “Foster Wallace”, “Una cosa divertente
   che non farò mai più”, “887-521-837-4”)`;
-
----
-
-### 3. Designer Notes
-
-#### 3.1. GIT
-
-We decided to use Git as dVCS and [GitHub](https://github.com/) as remote host. So we founded an [organization](https://github.com/UniPD-Segmentation-Fault-Core-Dumped) and created a private [repository](https://github.com/UniPD-Segmentation-Fault-Core-Dumped/Prova-intermedia-di-programmazione).
-
-In order to keep development simpler and more straightforward, we decided to use one main branch (main) and one branch per developer. For the same reason we also decided to use the following procedure:
-
-- Pull from remote main branch.
-- Switch to personal branch
-- Merge/Rebase to align.
-- Local development
-- Add, commit
-- Push to remote personal branch *(This is to have dual control and avoid a direct push to the master)*
-- Pull request and merge request directly in the remote.
-
-In this way we were able to maintain the linearity of the main branch without overlapping everyone's work.
-
-![Network Graph](/res/NetworkGraph.png)
