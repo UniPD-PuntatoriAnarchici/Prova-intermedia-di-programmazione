@@ -7,7 +7,8 @@
 
 //region - Static data members
 
-const std::string Date::MONTHS_MAP[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+const std::string Date::MONTHS_MAP[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
+                                        "Dec"};
 
 //endregion
 
@@ -30,10 +31,14 @@ Date::Date(const std::string &date) {
         elems[i] = elem;
     }
 
-    int unsafe_day = stoi(elems[2]);
-    day_ = Date::IntToUshortDay(unsafe_day);
-    month_ = Month(std::stoi(elems[1]));
-    year_ = std::stoi(elems[0]);
+    try {
+        int unsafe_day = stoi(elems[2]);
+        day_ = Date::IntToUshortDay(unsafe_day);
+        month_ = Month(std::stoi(elems[1]));
+        year_ = std::stoi(elems[0]);
+    } catch (const std::invalid_argument &ex) {
+        throw DATE_invalid();
+    }
 
     if (!Date::IsValid(day_, month_, year_)) throw DATE_invalid();
 }
@@ -91,7 +96,7 @@ bool Date::IsLeapYear(const long year) {
 Date Date::Today(void) {
     time_t now = time(0); // seconds offset since 1 Jan 1970
     tm *ltm = localtime(&now); // ltm is local time abbreviated
-    
+
     unsigned short safe_day = IntToUshortDay(ltm->tm_mday);
 
     return Date{safe_day, Month(ltm->tm_mon), (1900 + ltm->tm_year)};
@@ -109,4 +114,16 @@ std::ostream &operator<<(std::ostream &os, const Date &date) {
 unsigned short Date::IntToUshortDay(int unsafe_int) {
     if (unsafe_int < 0 || unsafe_int > 65535) throw Date::DATE_invalid();
     return static_cast<unsigned short>(unsafe_int); // now it's safe because i checked bounds
+}
+
+bool operator==(Date date1, Date date2) {
+    return date1.day() == date2.day() &&
+           date1.month() == date2.month() &&
+           date1.year() == date2.year();
+}
+
+bool operator!=(Date date1, Date date2) {
+    return date1.day() != date2.day() ||
+           date1.month() != date2.month() ||
+           date1.year() != date2.year();
 }

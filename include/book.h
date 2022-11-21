@@ -93,7 +93,7 @@ public:
     * @param [in] copyright_date as `std::string by const reference`
     */
     void set_copyright_date(const std::string &copyright_date) {
-        copyright_date_ = Date(copyright_date);
+        copyright_date_ = Date{copyright_date};
     }
 
     /**
@@ -102,6 +102,14 @@ public:
     */
     void set_isbn(const Isbn &isbn) {
         isbn_ = isbn;
+    }
+
+    /**
+    * @brief Isbn's setter
+    * @param [in] isbn as `std::string by by const reference`
+    */
+    void set_isbn(const std::string &isbn) {
+        isbn_ = Isbn{isbn};
     }
 
     /// endregion - Setters
@@ -219,7 +227,7 @@ std::ostream &operator<<(std::ostream &os, Book::Status status);
 
 //region - Equality
 bool operator==(const Book &a, const Book &b);
-
+//region - Not Equality
 bool operator!=(const Book &a, const Book &b);
 //endregion
 

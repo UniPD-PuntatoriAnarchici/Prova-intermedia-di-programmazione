@@ -6,7 +6,9 @@
 
 class Date {
 public:
-    class DATE_invalid {};
+
+    class DATE_invalid {
+    };
 
     enum Month {
         Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
@@ -15,6 +17,7 @@ public:
 
     // default Date is Unix start time
     Date(const unsigned short day = 1, const Month &month = Month::Jan, const long year = 1970);
+
     Date(const std::string &date);
 
     /// region - Getters
@@ -41,7 +44,7 @@ public:
      * @brief Year's getter
      * @return Year as `long`
      */
-    long year (void) const { return year_; }
+    long year(void) const { return year_; }
     /// endregion - Getters
 
     /// region - Setters
@@ -75,9 +78,14 @@ private:
     long year_;
 
     bool IsValid(const unsigned short day, const Month &month, const long year);
+
     static unsigned short IntToUshortDay(int unsafe_int);
 };
 
 std::ostream &operator<<(std::ostream &os, const Date &date);
+
+bool operator==(Date date1, Date date2);
+
+bool operator!=(Date date1, Date &date2);
 
 #endif // DATE_H
