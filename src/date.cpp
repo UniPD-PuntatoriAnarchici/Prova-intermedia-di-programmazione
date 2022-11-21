@@ -7,7 +7,7 @@
 
 //region - Static data members
 
-const std::string MONTHS_MAP[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+const std::string Date::MONTHS_MAP[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 //endregion
 
