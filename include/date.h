@@ -18,21 +18,49 @@ public:
 
     /// region - Getters
 
+    /**
+     * @brief Day's getter
+     * @return Day as `unsigned short`
+     */
     unsigned short day(void) const { return day_; }
 
-    std::string month(void) const { return months[month_ - 1]; }
+    /**
+     * @brief Month's getter
+     * @return Month as `std::string`
+     */
+    std::string month(void) const { return MONTHS_MAP[month_ - 1]; }
 
+    /**
+     * @brief Month's number getter
+     * @return Month's number as `Month`
+     */
     Month month_number(void) const { return month_; }
 
+    /**
+     * @brief Year's getter
+     * @return Year as `long`
+     */
     long year (void) const { return year_; }
     /// endregion - Getters
 
     /// region - Setters
 
+    /**
+     * @brief Day's setter
+     * @param [in] day as `const unsigned short`
+     */
     void set_day(const unsigned short day) { day_ = day; }
 
+    /**
+     * @brief Month's setter
+     * @param [in] month as `month by const reference`
+     */
     void set_month(const Month &month) { month_ = month; }
 
+    /**
+     * @brief Year's setter
+     * @param [in] year as `const long`
+     */
     void set_year(const long year) { year_ = year; }
     /// endregion - Setters
 
@@ -45,7 +73,7 @@ private:
     Month month_;
     long year_;
 
-    std::string months[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    std::string MONTHS_MAP[12] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
     bool IsValid(const unsigned short day, const Month &month, const long year);
     static unsigned short IntToUshortDay(int unsafe_int);
