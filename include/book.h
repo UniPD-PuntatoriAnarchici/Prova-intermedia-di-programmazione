@@ -227,7 +227,7 @@ std::ostream &operator<<(std::ostream &os, Book::Status status);
 
 //region - Equality
 bool operator==(const Book &a, const Book &b);
-
+//region - Not Equality
 bool operator!=(const Book &a, const Book &b);
 //endregion
 

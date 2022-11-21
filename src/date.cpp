@@ -31,10 +31,14 @@ Date::Date(const std::string &date) {
         elems[i] = elem;
     }
 
-    int unsafe_day = stoi(elems[2]);
-    day_ = Date::IntToUshortDay(unsafe_day);
-    month_ = Month(std::stoi(elems[1]));
-    year_ = std::stoi(elems[0]);
+    try {
+        int unsafe_day = stoi(elems[2]);
+        day_ = Date::IntToUshortDay(unsafe_day);
+        month_ = Month(std::stoi(elems[1]));
+        year_ = std::stoi(elems[0]);
+    } catch (const std::invalid_argument &ex) {
+        throw DATE_invalid();
+    }
 
     if (!Date::IsValid(day_, month_, year_)) throw DATE_invalid();
 }

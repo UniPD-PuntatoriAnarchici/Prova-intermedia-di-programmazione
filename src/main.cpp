@@ -35,48 +35,48 @@ int main() {
 
     //region @Automatic basic tests
 
-    Book test;
+    Book testBook;
 
     //region - Default value
 
     cout << "===== DEFAULT VALUE =======" << std::endl;
     cout << "Default Title: ";
-    if (test.title().empty()) {
+    if (testBook.title().empty()) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Default Author First Name: ";
-    if (test.author_fname().empty()) {
+    if (testBook.author_fname().empty()) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Default Author Last Name: ";
-    if (test.author_lname().empty()) {
+    if (testBook.author_lname().empty()) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Default ISBN: ";
-    if (test.isbn() == Isbn{"000-000-000-a"}) {
+    if (testBook.isbn() == Isbn{"000-000-000-a"}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Default copyright Date: ";
-    if (test.copyright_date() == Date{}) {
+    if (testBook.copyright_date() == Date{}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Default status: ";
-    if (test.status() == Book::AVAILABLE) {
+    if (testBook.status() == Book::AVAILABLE) {
         passed(true, cout);
     } else {
         passed(false, cout);
@@ -89,64 +89,64 @@ int main() {
     //region - Setter/Getter
     cout << "===== Setter/Getter =======" << std::endl;
     cout << "Title: ";
-    test.set_title("TITLE");
-    if (test.title() == "TITLE") {
+    testBook.set_title("TITLE");
+    if (testBook.title() == "TITLE") {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Author First Name: ";
-    test.set_author_fname("FNAME");
-    if (test.author_fname() == "FNAME") {
+    testBook.set_author_fname("FNAME");
+    if (testBook.author_fname() == "FNAME") {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Author Last Name: ";
-    test.set_author_lname("LNAME");
-    if (test.author_lname() == "LNAME") {
+    testBook.set_author_lname("LNAME");
+    if (testBook.author_lname() == "LNAME") {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "ISBN - string: ";
-    test.set_isbn("123-456-789-a");
-    if (test.isbn() == Isbn{"123-456-789-a"}) {
+    testBook.set_isbn("123-456-789-a");
+    if (testBook.isbn() == Isbn{"123-456-789-a"}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "ISBN - object: ";
-    test.set_isbn(Isbn{"987-654-321-b"});
-    if (test.isbn() == Isbn{"987-654-321-b"}) {
+    testBook.set_isbn(Isbn{"987-654-321-b"});
+    if (testBook.isbn() == Isbn{"987-654-321-b"}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Copyright Date string: ";
-    test.set_copyright_date("12-10-1990");
-    if (test.copyright_date() == Date{"12-10-1990"}) {
+    testBook.set_copyright_date("12-10-1990");
+    if (testBook.copyright_date() == Date{"12-10-1990"}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Copyright Date object: ";
-    test.set_copyright_date(Date{"12-10-1990"});
-    if (test.copyright_date() == Date{"12-10-1990"}) {
+    testBook.set_copyright_date(Date{"12-10-1990"});
+    if (testBook.copyright_date() == Date{"12-10-1990"}) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Status: ";
-    test.set_status(Book::LENDING);
-    if (test.status() == Book::LENDING) {
+    testBook.set_status(Book::LENDING);
+    if (testBook.status() == Book::LENDING) {
         passed(true, cout);
     } else {
         passed(false, cout);
@@ -160,16 +160,16 @@ int main() {
     cout << "===== Status Function =======" << std::endl;
 
     cout << "Set available: ";
-    test.setAvailable();
-    if (test.status() == Book::AVAILABLE) {
+    testBook.setAvailable();
+    if (testBook.status() == Book::AVAILABLE) {
         passed(true, cout);
     } else {
         passed(false, cout);
     }
 
     cout << "Set lending: ";
-    test.setLending();
-    if (test.status() == Book::LENDING) {
+    testBook.setLending();
+    if (testBook.status() == Book::LENDING) {
         passed(true, cout);
     } else {
         passed(false, cout);
@@ -183,40 +183,83 @@ int main() {
 
     cout << "Date - string: ";
     try {
-        test.set_copyright_date("aaaa");
+        testBook.set_copyright_date("aaaa");
         passed(false, cout);
-    } catch (const std::exception &ex) {
+    } catch (const Date::DATE_invalid &ex) {
         passed(true, cout);
     }
 
     cout << "Date - object: ";
     try {
-        test.set_copyright_date(Date{"aaaa"});
+        testBook.set_copyright_date(Date{"aaaa"});
         passed(false, cout);
-    } catch (const std::exception &ex) {
+    } catch (const Date::DATE_invalid &ex) {
         passed(true, cout);
     }
-//
-//    cout << "Isbn - string: ";
-//    try {
-//        test.set_isbn("aaaa");
-//        passed(false, cout);
-//    } catch (const std::exception &ex) {
-//        passed(true, cout);
-//    }
-//
+
+    cout << "Isbn - string: ";
+    try {
+        testBook.set_isbn("aaaa");
+        passed(false, cout);
+    } catch (const Isbn::ISBN_invalid &ex) {
+        passed(true, cout);
+    }
 
     cout << "Isbn - object: ";
     try {
-        test.set_isbn(Isbn{"aaaa"});
+        testBook.set_isbn(Isbn{"aaaa"});
         passed(false, cout);
-    } catch (const std::exception &ex) {
+    } catch (const Isbn::ISBN_invalid &ex) {
         passed(true, cout);
     }
 
     cout << "===== END Status Function =======" << std::endl;
     //endregion
 
+    //region - Operator
+    cout << "===== Operator =====" << std::endl;
+    Book testBook2{};
+
+    testBook.set_isbn(Isbn{"123-456-789-a"});
+    testBook2.set_isbn(Isbn{"123-456-789-a"});
+
+    cout << "Book - equal - Same isbn: ";
+    if (testBook == testBook2) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+    cout << "Book - not equal - Same isbn: ";
+    if (testBook != testBook2) {
+        passed(false, cout);
+    } else {
+        passed(true, cout);
+    }
+
+    testBook2.set_isbn(Isbn{"123-456-789-b"});
+
+    cout << "Book - equal - Different isbn: ";
+    if (testBook == testBook2) {
+        passed(false, cout);
+    } else {
+        passed(true, cout);
+    }
+
+    cout << "Book - not equal - Different isbn: ";
+    if (testBook != testBook2) {
+        passed(true, cout);
+    } else {
+        passed(false, cout);
+    }
+
+
+    cout << "===== END Operator =======" << std::endl;
+    //endregion
+
+    std::cout << std::endl << "#######################################" << std::endl;
+    std::cout << "TOTAL PASSED: " << passedCounter << std::endl;
+    std::cout << "TOTAL FAILED: " << failedCounter << std::endl;
+    std::cout << "#######################################" << std::endl << std::endl;
 
     //endregion
 

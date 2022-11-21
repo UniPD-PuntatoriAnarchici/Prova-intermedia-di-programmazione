@@ -100,6 +100,7 @@ std::ostream &operator<<(std::ostream &os, Book::Status status) {
 
 /**
  * Book's' stream output operator.
+ * If book is not itiliazied it prints:  <book not initialized>
  * @param os output stream
  * @param [in] book  as `Book by const reference`
  * @return
@@ -107,7 +108,7 @@ std::ostream &operator<<(std::ostream &os, Book::Status status) {
 std::ostream &operator<<(std::ostream &os, const Book &book) {
     if (book.title().empty() && book.author_fname().empty() && book.author_lname().empty())
         return os << "--    Book    --" << std::endl
-                  << "<book not initialized" << std::endl
+                  << "<book not initialized>" << std::endl
                   << "-- End of Book --" << std::endl;
 
     return os << "--    Book    --" << std::endl
